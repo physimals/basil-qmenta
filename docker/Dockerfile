@@ -3,9 +3,8 @@ FROM qmentasdk/minimal:latest
 
 # Install Dependencies
 RUN apt-get update && \
-    apt-get install -y wget python2.7 && \
+    apt-get install -y wget python2.7 libglu1-mesa-dev freeglut3-dev mesa-common-dev && \
     apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y
-#build-essential pkg-config cmake git pigz && \
 
 RUN wget https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py && \
     python2.7 fslinstaller.py -d /usr/local/fsl -V 6.0.5 && \
