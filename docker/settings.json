@@ -1,0 +1,51 @@
+[
+	{
+        "type": "heading",
+        "content": "ASL data"
+    },
+    {
+		"type":"container",
+		"title": "Input ASL data",
+		"id": "input",
+		"mandatory": 1,
+		"batch": 1,
+		"file_filter": "c_files[1,1]<'ASL',[],'\\.*'>",
+		"in_filter": ["mri_brain_data"],
+		"out_filter": [],
+		"anchor": 1
+    },
+    {
+        "type": "string",
+        "title": "TIs/PLDs (comma separated)",
+        "id": "plds",
+        "mandatory": 1,
+        "default": "1.8"
+    },
+    {
+        "type": "single_choice",
+        "title": "Labelling type",
+        "id":"labelling",
+        "mandatory":1,
+        "default":"pCASL",
+        "options":[["pCASL"], ["PASL"]]
+    },
+	{
+        "type": "heading",
+        "content": "Structural data"
+    },
+	{
+		"type":"container",
+		"title": "T1w structural data data",
+		"id": "struc",
+		"mandatory": 1,
+		"batch": 1,
+		"file_filter": "c_files[0,1]<'T1',[],'\\.*'>",
+		"in_filter": ["mri_brain_data"],
+		"out_filter": [],
+		"anchor": 1
+	},
+	{
+        "type": "heading",
+        "content": "Calibration data"
+    }
+]
