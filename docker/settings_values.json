@@ -1,0 +1,12 @@
+{
+  "input": [
+    {
+      "path": "Axial-3D-PASL-(Eyes-Open).zip",
+      "modality": "ASL"
+    }
+  ],
+  "struc": [
+  ],
+  "plds" : 1.8,
+  "labelling" : "PASL"
+}
