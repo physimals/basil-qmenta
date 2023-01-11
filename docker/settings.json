@@ -37,12 +37,12 @@
 		"type":"container",
 		"title": "T1w structural data data",
 		"id": "struc",
-		"mandatory": 1,
-		"batch": 1,
+		"mandatory": 0,
+		"batch": 0,
 		"file_filter": "c_files[0,1]<'T1',[],'\\.*'>",
 		"in_filter": ["mri_brain_data"],
 		"out_filter": [],
-		"anchor": 1
+		"anchor": 0
 	},
 	{
         "type": "heading",
