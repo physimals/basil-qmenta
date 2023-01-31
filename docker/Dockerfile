@@ -18,7 +18,7 @@ RUN cd /tmp && \
 	make && make install
 
 # Install oxasl
-RUN pip install oxasl
+RUN pip install git+https://github.com/physimals/oxasl
 
 # Add QMENTA interface script
 Add tool.py /root
