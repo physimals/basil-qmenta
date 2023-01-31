@@ -1,11 +1,15 @@
 {
   "input": [
     {
-      "path": "Axial-3D-PASL-(Eyes-Open).zip",
+      "path" : "Axial-3D-PASL-(Eyes-Open)_1.zip",
       "modality": "ASL"
     }
   ],
   "struc": [
+    {
+      "path" : "Accelerated-Sagittal-MPRAGE.zip",
+      "modality": "T1"
+    }
   ],
   "plds" : 1.8,
   "labelling" : "PASL"
