@@ -9,7 +9,7 @@
 		"id": "input",
 		"mandatory": 1,
 		"batch": 1,
-		"file_filter": "c_files[1,1]<'ASL',[],'\\.*'>",
+		"file_filter": "c_files[1,1](m'ASL')?",
 		"in_filter": ["mri_brain_data"],
 		"out_filter": [],
 		"anchor": 1
@@ -27,7 +27,7 @@
         "id":"labelling",
         "mandatory":1,
         "default":"pCASL",
-        "options":[["pCASL"], ["PASL"]]
+        "options":[["pCASL", "pcasl"], ["PASL", "pasl"]]
     },
 	{
         "type": "heading",
@@ -39,7 +39,7 @@
 		"id": "struc",
 		"mandatory": 0,
 		"batch": 0,
-		"file_filter": "c_files[0,1]<'T1',[],'\\.*'>",
+		"file_filter": "c_files[0,1](m'T1')?",
 		"in_filter": ["mri_brain_data"],
 		"out_filter": [],
 		"anchor": 0
