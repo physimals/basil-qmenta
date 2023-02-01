@@ -52,13 +52,17 @@ def get_input_data(context, key, name, option, progress, required=True):
         else:
             return ""
 
-    path = file_handlers[0].download('/root/data/')
+    dicomdir = f"/root/dicom/{key}"
+    os.makedirs(dicomdir, exist_ok=True)
+    path = file_handlers[0].download(dicomdir)
+    context.set_progress(value=progress, message=f"Downloaded {name} data: {path}")
     if not path.endswith(".nii") and not path.endswith(".nii.gz"):
         # Perform DCM->Nii conversion
-        os.makedirs("/root/nifti", exist_ok=True)
-        exit_code = os.system(f"dcm2niix -o /root/nifti -z y -b y -f {key} {path}")
+        niftidir = f"/root/nifti/{key}"
+        os.makedirs(niftidir, exist_ok=True)
+        exit_code = os.system(f"dcm2niix -o {niftidir} -z y -b y -f {key} {path}")
         if exit_code == 0:
-            path = f"/root/nifti/{key}.nii.gz"
+            path = f"{niftidir}/{key}.nii.gz"
         else:
             raise RuntimeError(f"Failed to perform DCM-NII conversion on input data {key}")
 
