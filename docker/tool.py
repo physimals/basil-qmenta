@@ -62,6 +62,8 @@ def get_input_data(context, key, name, option, progress, required=True):
         os.makedirs(niftidir, exist_ok=True)
         exit_code = os.system(f"dcm2niix -o {niftidir} -z y -b y -f {key} {path}")
         if exit_code == 0:
+            for fname in os.listdir(niftidir):
+                context.set_progress(value=progress, message=f"DCM2NIIX on {name} output: {fname}")
             path = f"{niftidir}/{key}.nii.gz"
         else:
             raise RuntimeError(f"Failed to perform DCM-NII conversion on input data {key}")
