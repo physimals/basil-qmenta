@@ -65,6 +65,9 @@ def get_input_data(context, key, name, option, progress, required=True):
             for fname in os.listdir(niftidir):
                 context.set_progress(value=progress, message=f"DCM2NIIX on {name} output: {fname}")
             path = f"{niftidir}/{key}.nii.gz"
+            import nibabel as nib
+            nii = nib.load(path)
+            context.set_progress(value=progress, message=f"Dimensions of {path}: {nii.shape}")
         else:
             raise RuntimeError(f"Failed to perform DCM-NII conversion on input data {key}")
 
