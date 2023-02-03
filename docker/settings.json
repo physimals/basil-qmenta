@@ -6,10 +6,10 @@
     {
 		"type":"container",
 		"title": "Input ASL data",
-		"id": "input",
+		"id": "asl",
 		"mandatory": 1,
 		"batch": 1,
-		"file_filter": "c_files[1,1](m'ASL')?",
+		"file_filter": "c_files_asl[1,1](m'ASL')?",
 		"in_filter": ["mri_brain_data"],
 		"out_filter": [],
 		"anchor": 1
@@ -39,7 +39,7 @@
 		"id": "struc",
 		"mandatory": 0,
 		"batch": 0,
-		"file_filter": "c_files[0,1](m'T1')?",
+		"file_filter": "c_files_struc[0,1](m'T1')?",
 		"in_filter": ["mri_brain_data"],
 		"out_filter": [],
 		"anchor": 0

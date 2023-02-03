@@ -43,7 +43,7 @@ def get_input_data(context, key, name, option, progress, required=True):
     :return: Text to add to OXASL command line
     """
     try:
-        file_handlers = context.get_files(key)
+        file_handlers = context.get_files(key, file_filter_condition_name=f"c_files_{key}")
     except:
         file_handlers = []    
     if len(file_handlers) == 0:
@@ -60,6 +60,8 @@ def get_input_data(context, key, name, option, progress, required=True):
         # Perform DCM->Nii conversion
         niftidir = f"/root/nifti/{key}"
         os.makedirs(niftidir, exist_ok=True)
+        for fname in os.listdir(path):
+            context.set_progress(value=progress, message=f"DCM file found in {path}: {fname}")
         exit_code = os.system(f"dcm2niix -o {niftidir} -z y -b y -f {key} {path}")
         if exit_code == 0:
             for fname in os.listdir(niftidir):
@@ -68,6 +70,7 @@ def get_input_data(context, key, name, option, progress, required=True):
             import nibabel as nib
             nii = nib.load(path)
             context.set_progress(value=progress, message=f"Dimensions of {path}: {nii.shape}")
+            context.upload_file(path, f"{key}.nii.gz")
         else:
             raise RuntimeError(f"Failed to perform DCM-NII conversion on input data {key}")
 
@@ -116,7 +119,13 @@ def run(context):
     :param context: Run context object for obtaining settings and input data
     """
     try:
-        context.set_progress(value=0, message=f"Running OXASL analysis tool")
+        try:
+            with open("version.txt", "r") as f:
+                version = f.read()
+        except:
+            traceback.print_exc()
+            version = "(unknown)"
+        context.set_progress(value=0, message=f"Running OXASL analysis tool v{version}")
         analysis_data = context.fetch_analysis_data()
         setup_fsl(context, 1)
         
@@ -124,7 +133,7 @@ def run(context):
         oxasl_cmd = f"oxasl -o oxasl_output --debug 2>&1 >oxasl_stdout.txt"
 
         context.set_progress(value=10, message=f"Getting input data in NIFTI format")
-        oxasl_cmd += get_input_data(context, 'input', "ASL", "-i", 11)
+        oxasl_cmd += get_input_data(context, 'asl', "ASL", "-i", 11)
         oxasl_cmd += get_input_data(context, 'struc', 'structural', '-s', 12, required=False)
 
         context.set_progress(value=20, message=f"Getting input parameters")
