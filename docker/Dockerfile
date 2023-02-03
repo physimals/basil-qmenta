@@ -20,6 +20,7 @@ RUN cd /tmp && \
 # Install oxasl
 RUN pip install git+https://github.com/physimals/oxasl
 
-# Add QMENTA interface script
+# Add QMENTA interface script and other tool files
 Add tool.py /root
+Add version.txt /root
 
